@@ -26,25 +26,89 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             exit();
         } else {
-            echo "<p class='alert alert-danger text-center'>Incorrect password.</p>";
+            echo "<div class='container mt-3'><div class='alert alert-danger text-center'>Incorrect password.</div></div>";
         }
     } else {
-        echo "<p class='alert alert-danger text-center'>Email not found.</p>";
+        echo "<div class='container mt-3'><div class='alert alert-danger text-center'>Email not found.</div></div>";
     }
 }
 ?>
 
-<div class="container mt-5">
-    <div class="card mx-auto shadow-lg" style="max-width: 400px;">
-        <div class="card-body">
-            <h3 class="text-center">Login</h3>
-            <form method="post">
-                <input type="email" name="email" class="form-control mb-2" required placeholder="Email">
-                <input type="password" name="password" class="form-control mb-2" required placeholder="Password">
-                <button type="submit" class="btn btn-primary w-100">Login</button>
-                <p class="text-center mt-2">Don't have an account? <a href="register.php">Register</a></p>
-            </form>
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(to right, #667eea, #764ba2);
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+    .login-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        color: #fff;
+        max-width: 400px;
+        width: 100%;
+        animation: slideUp 0.6s ease-out;
+    }
+    @keyframes slideUp {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    .login-card input {
+        border-radius: 12px;
+        border: none;
+        padding: 12px;
+    }
+    .login-card input:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+    }
+    .login-btn {
+        background: #fff;
+        color: #764ba2;
+        font-weight: bold;
+        border-radius: 12px;
+        transition: 0.3s;
+    }
+    .login-btn:hover {
+        background: #f0f0f0;
+        color: #333;
+    }
+    .form-label {
+        font-weight: 600;
+    }
+</style>
+
+<div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div class="login-card text-center">
+        <div class="mb-4">
+            <i class="fas fa-user-circle fa-3x mb-2"></i>
+            <h2 class="fw-bold">Sign In</h2>
+            <p class="mb-0">Welcome back! Please login to continue</p>
         </div>
+        <form method="post">
+            <div class="mb-3 text-start">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" name="email" class="form-control" required placeholder="example@email.com">
+            </div>
+            <div class="mb-3 text-start">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" required placeholder="••••••••">
+            </div>
+            <div class="d-grid mb-3">
+                <button type="submit" class="btn login-btn">Login</button>
+            </div>
+            <small>Don’t have an account? <a href="register.php" style="color: #fff; text-decoration: underline;">Register here</a></small>
+        </form>
     </div>
 </div>
 

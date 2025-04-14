@@ -28,7 +28,17 @@ if (isset($_GET['code'])) {
     $google_id = $google_user->id;
     $name = $google_user->name;
     $email = $google_user->email;
+  // ✅ Check if user already exists in database
+    $stmt = $conn->prepare("SELECT id, role FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
+    if ($row = $result->fetch_assoc()) {
+        $_SESSION["user_id"] = $row["id"];
+        $_SESSION["user_name"] = $name;
+        $_SESSION["role"] = $row["role"];
+    }
     header("Location: index.php");
     exit();
 } else {

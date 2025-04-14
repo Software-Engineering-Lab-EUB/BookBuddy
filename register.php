@@ -22,7 +22,63 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- Match styles with login -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(to right, #667eea, #764ba2);
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+    .auth-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        color: #fff;
+        max-width: 420px;
+        width: 100%;
+        animation: fadeIn 0.6s ease-out;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .auth-card input {
+        border-radius: 12px;
+        border: none;
+        padding: 12px;
+    }
+    .auth-card input:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+    }
+    .btn-custom {
+        background: #fff;
+        color: #2F80ED;
+        font-weight: bold;
+        border-radius: 12px;
+        transition: 0.3s;
+    }
+    .btn-custom:hover {
+        background: #f0f0f0;
+        color: #333;
+    }
+    .google-btn {
+        background-color: #DB4437;
+        color: #fff;
+        font-weight: 600;
+        border-radius: 12px;
+        border: none;
+    }
+    .google-btn:hover {
+        background-color: #c53727;
+    }
+    .form-label {
+        font-weight: 600;
+    }
+</style>
 <!-- Register Form with Matching UI -->
 <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
     <div class="auth-card text-center">

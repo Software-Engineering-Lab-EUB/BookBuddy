@@ -37,6 +37,7 @@ if (isset($_GET['code'])) {
     if ($row = $result->fetch_assoc()) {
         $_SESSION["user_id"] = $row["id"];
         $_SESSION["user_name"] = $name;
+         $_SESSION["email"] = $email;
         $_SESSION["role"] = $row["role"];
     }
     else {
@@ -47,6 +48,7 @@ if (isset($_GET['code'])) {
 
         $_SESSION["user_id"] = $conn->insert_id;
         $_SESSION["user_name"] = $name;
+         $_SESSION["email"] = $email;
         $_SESSION["role"] = "user";
     }
     header("Location: index.php");

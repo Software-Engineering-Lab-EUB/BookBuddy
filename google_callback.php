@@ -39,6 +39,16 @@ if (isset($_GET['code'])) {
         $_SESSION["user_name"] = $name;
         $_SESSION["role"] = $row["role"];
     }
+    else {
+        // ✅ Insert new user with Google
+        $stmt = $conn->prepare("INSERT INTO users (name, email, password, is_verified, role) VALUES (?, ?, '', 1, 'user')");
+        $stmt->bind_param("ss", $name, $email);
+        $stmt->execute();
+
+        $_SESSION["user_id"] = $conn->insert_id;
+        $_SESSION["user_name"] = $name;
+        $_SESSION["role"] = "user";
+    }
     header("Location: index.php");
     exit();
 } else {

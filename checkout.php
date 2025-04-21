@@ -3,11 +3,13 @@ session_start();
 include "db.php";
 include "header.php";
 
+// Check if the user is logged in
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
     exit();
 }
 
+// Calculate total price from the cart
 $total_price = 0;
 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     foreach ($_SESSION['cart'] as $book_id => $qty) {
@@ -22,6 +24,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     exit();
 }
 
+// Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $full_name = $_POST["full_name"];
     $phone = $_POST["phone"];
@@ -34,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $_SESSION["user_id"];
 
     if ($payment_method === "cod") {
+        // Place order immediately for Cash on Delivery
         $stmt = $conn->prepare("INSERT INTO orders (user_id, address, total_price, payment_method, status) VALUES (?, ?, ?, ?, 'pending')");
         $stmt->bind_param("ssds", $user_id, $full_address, $total_price, $payment_method);
         $stmt->execute();
@@ -56,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: orders.php");
         exit();
     } else {
+        // Redirect to dummy_payment.php for online payment
         $_SESSION['checkout_data'] = [
             'user_id' => $user_id,
             'full_address' => $full_address,
@@ -64,12 +69,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'cart' => $_SESSION['cart']
         ];
         header("Location: gateway_payment.php");
+
         exit();
     }
 }
-
 ?>
-    <div class="container py-5">
+
+<!-- Checkout Form UI -->
+<div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="card shadow-lg border-0">
@@ -134,7 +141,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
         </div>
-     </div>
- </div>
+    </div>
+</div>
 
 
+<script>
+function validateForm() {
+    const name = document.getElementById('full_name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+
+    if (name.length < 2 || phone.length < 11 || address.length < 10) {
+        alert("Please fill in all fields correctly.");
+        return false;
+    }
+    return true;
+}
+</script>
+
+<?php include "footer.php"; ?>

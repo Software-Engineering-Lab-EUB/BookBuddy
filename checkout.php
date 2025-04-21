@@ -69,3 +69,72 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 ?>
+    <div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-success text-white text-center py-3 rounded-top">
+                    <h3 class="mb-0">Checkout</h3>
+                </div>
+                <div class="card-body bg-light">
+                    <form method="post" action="checkout.php" onsubmit="return validateForm();">
+
+                        <h5 class="mb-4 text-success fw-bold">Shipping Address</h5>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="full_name" class="form-label">Full Name</label>
+                                <input type="text" name="full_name" id="full_name" class="form-control" required placeholder="Enter your full name">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="text" name="phone" id="phone" class="form-control" required placeholder="e.g. 01XXXXXXXXX">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="division" class="form-label">Division</label>
+                            <select name="division" id="division" class="form-select" required>
+                                <option value="">Select Division</option>
+                                <option value="Dhaka">Dhaka</option>
+                                <option value="Chattogram">Chattogram</option>
+                                <option value="Khulna">Khulna</option>
+                                <option value="Rajshahi">Rajshahi</option>
+                                <option value="Barishal">Barishal</option>
+                                <option value="Sylhet">Sylhet</option>
+                                <option value="Rangpur">Rangpur</option>
+                                <option value="Mymensingh">Mymensingh</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="city" class="form-label">City / District</label>
+                            <input type="text" name="city" id="city" class="form-control" required placeholder="e.g. Dhaka">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Full Address</label>
+                            <textarea name="address" id="address" rows="3" class="form-control" required placeholder="House no, Road no, Area"></textarea>
+                        </div>
+
+                        <h5 class="mb-3 text-success fw-bold">Payment Method</h5>
+                        <div class="mb-4">
+                            <select name="payment_method" id="payment_method" class="form-select" required>
+                                <option value="">Choose Payment Method</option>
+                                <option value="bkash">bKash</option>
+                                <option value="nagad">Nagad</option>
+                                <option value="cod">Cash on Delivery</option>
+                            </select>
+                        </div>
+
+                        <input type="hidden" name="total_price" value="<?= $total_price ?>">
+
+                        <button type="submit" class="btn btn-success btn-lg w-100">✅ Confirm & Place Order (৳<?= $total_price ?>)</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+     </div>
+ </div>
+
+

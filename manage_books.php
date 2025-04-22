@@ -169,5 +169,34 @@ $result = $conn->query("SELECT * FROM books");
             <?php endwhile; ?>
         </tbody>
     </table>
+
+     <!-- Edit Book Form -->
+    <?php if (isset($_GET['edit'])): ?>
+        <h4>Edit Book</h4>
+        <form method="post" enctype="multipart/form-data">
+            <input type="text" name="title" class="form-control mb-2" required placeholder="Book Title" value="<?= htmlspecialchars($book['title']); ?>">
+            <input type="text" name="author" class="form-control mb-2" required placeholder="Author" value="<?= htmlspecialchars($book['author']); ?>">
+            <input type="number" name="price" class="form-control mb-2" required placeholder="Price" step="0.01" value="<?= htmlspecialchars($book['price']); ?>">
+            <input type="number" name="stock" class="form-control mb-2" required placeholder="Stock" value="<?= htmlspecialchars($book['stock']); ?>">
+            <select name="category_id" class="form-control mb-2" required>
+                <option value="">Select Category</option>
+                <?php
+                $category_result = $conn->query("SELECT * FROM categories");
+                while ($category = $category_result->fetch_assoc()) {
+                    $selected = $category['category_id'] == $book['category_id'] ? 'selected' : '';
+                    echo "<option value='" . $category['category_id'] . "' $selected>" . htmlspecialchars($category['category_name']) . "</option>";
+                }
+                ?>
+            </select>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="4" required><?= htmlspecialchars($book['description']); ?></textarea>
+            </div>
+            <label for="image">Upload New Image (optional):</label>
+            <input type="file" name="image" class="form-control mb-2" accept="image/*">
+            <button type="submit" name="update_book" class="btn btn-primary w-100">Update Book</button>
+        </form>
+    <?php endif; ?>
+</div>
                 
 

@@ -17,6 +17,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_book'])) {
     $category_id = (int) trim($_POST["category_id"]); // Ensure this is an integer
     $description = trim($_POST["description"]); // Get the description
 
+    // Handle image upload
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+        $image = $_FILES['image'];
+        $imagePath = 'images/' . basename($image['name']);
+        move_uploaded_file($image['tmp_name'], $imagePath);
+    } else {
+        $imagePath = null; // Handle the case where no image is uploaded
+    }
+
+    // Insert the book into the database
+    $stmt = $conn->prepare("INSERT INTO books (title, author, price, stock, category_id, image, description) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssdisss", $title, $author, $price, $stock, $category_id, $imagePath, $description);
+    $stmt->execute();
+    header("Location: manage_books.php");
+    exit();
+}
+
 
  // Insert the book into the database
     $stmt = $conn->prepare("INSERT INTO books (title, author, price, stock, category_id, image, description) VALUES (?, ?, ?, ?, ?, ?, ?)");

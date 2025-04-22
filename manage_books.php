@@ -7,7 +7,6 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
 include "header.php";
 include "db.php";
 
-
 // Handle adding a new book
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_book'])) {
     $title = trim($_POST["title"]);
@@ -34,15 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_book'])) {
     exit();
 }
 
-
- // Insert the book into the database
-    $stmt = $conn->prepare("INSERT INTO books (title, author, price, stock, category_id, image, description) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssdisss", $title, $author, $price, $stock, $category_id, $imagePath, $description);
-    $stmt->execute();
-    header("Location: manage_books.php");
-    exit();
-
-    // Handle editing a book
+// Handle editing a book
 if (isset($_GET['edit'])) {
     $book_id = $_GET['edit'];
     $stmt = $conn->prepare("SELECT * FROM books WHERE id = ?");
@@ -59,7 +50,7 @@ if (isset($_GET['edit'])) {
         $category_id = (int) trim($_POST["category_id"]); // Ensure this is an integer
         $description = trim($_POST["description"]); // Get the description
 
-         // Handle image upload
+        // Handle image upload
         if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
             $image = $_FILES['image'];
             $imagePath = 'images/' . basename($image['name']);
@@ -80,7 +71,7 @@ if (isset($_GET['edit'])) {
     }
 }
 
- // Handle deleting a book
+// Handle deleting a book
 if (isset($_GET['delete'])) {
     $book_id = $_GET['delete'];
 
@@ -98,7 +89,6 @@ if (isset($_GET['delete'])) {
     exit();
 }
 
-    
 // Fetch books from the database
 $result = $conn->query("SELECT * FROM books");
 ?>
@@ -131,9 +121,7 @@ $result = $conn->query("SELECT * FROM books");
         <button type="submit" name="add_book" class="btn btn-primary w-100">Add Book</button>
     </form>
 
-
-
-<!-- Book List -->
+    <!-- Book List -->
     <table class="table table-striped">
         <thead>
             <tr>
@@ -146,7 +134,7 @@ $result = $conn->query("SELECT * FROM books");
                 <th>Actions</th>
             </tr>
         </thead>
-     <tbody>
+        <tbody>
             <?php while ($row = $result->fetch_assoc()): ?>
             <tr>
                 <td><?= htmlspecialchars($row["id"]); ?></td>
@@ -154,7 +142,7 @@ $result = $conn->query("SELECT * FROM books");
                 <td><?= htmlspecialchars($row["author"]); ?></td>
                 <td>$<?= number_format($row["price"], 2); ?></td>
                 <td><?= htmlspecialchars($row["stock"]); ?></td>
-                 <td>
+                <td>
                     <?php if ($row["image"]): ?>
                         <img src="<?= htmlspecialchars($row["image"]); ?>" alt="<?= htmlspecialchars($row["title"]); ?>" style="width: 50px; height: auto;" data-toggle="modal" data-target="#imageModal" data-image="<?= htmlspecialchars($row["image"]); ?>" class="thumbnail">
                     <?php else: ?>
@@ -170,7 +158,7 @@ $result = $conn->query("SELECT * FROM books");
         </tbody>
     </table>
 
-     <!-- Edit Book Form -->
+    <!-- Edit Book Form -->
     <?php if (isset($_GET['edit'])): ?>
         <h4>Edit Book</h4>
         <form method="post" enctype="multipart/form-data">
@@ -230,5 +218,3 @@ $result = $conn->query("SELECT * FROM books");
 </script>
 
 <?php include "footer.php"; ?>
-                
-

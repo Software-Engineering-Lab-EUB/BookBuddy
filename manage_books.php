@@ -25,6 +25,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_book'])) {
     header("Location: manage_books.php");
     exit();
 
+    // Handle editing a book
+if (isset($_GET['edit'])) {
+    $book_id = $_GET['edit'];
+    $stmt = $conn->prepare("SELECT * FROM books WHERE id = ?");
+    $stmt->bind_param("i", $book_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $book = $result->fetch_assoc();
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_book'])) {
+        $title = trim($_POST["title"]);
+        $author = trim($_POST["author"]);
+        $price = (float) trim($_POST["price"]); // Ensure this is a float
+        $stock = (int) trim($_POST["stock"]); // Ensure this is an integer
+        $category_id = (int) trim($_POST["category_id"]); // Ensure this is an integer
+        $description = trim($_POST["description"]); // Get the description
+    
 // Fetch books from the database
 $result = $conn->query("SELECT * FROM books");
 ?>

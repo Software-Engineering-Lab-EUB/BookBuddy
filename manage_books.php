@@ -41,6 +41,25 @@ if (isset($_GET['edit'])) {
         $stock = (int) trim($_POST["stock"]); // Ensure this is an integer
         $category_id = (int) trim($_POST["category_id"]); // Ensure this is an integer
         $description = trim($_POST["description"]); // Get the description
+
+ // Handle deleting a book
+if (isset($_GET['delete'])) {
+    $book_id = $_GET['delete'];
+
+    // First, delete any order items that reference this book
+    $stmt = $conn->prepare("DELETE FROM order_details WHERE book_id = ?");
+    $stmt->bind_param("i", $book_id);
+    $stmt->execute();
+
+    // Now delete the book
+    $stmt = $conn->prepare("DELETE FROM books WHERE id = ?");
+    $stmt->bind_param("i", $book_id);
+    $stmt->execute();
+
+    header("Location: manage_books.php");
+    exit();
+}
+
     
 // Fetch books from the database
 $result = $conn->query("SELECT * FROM books");

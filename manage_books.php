@@ -154,5 +154,20 @@ $result = $conn->query("SELECT * FROM books");
                 <td><?= htmlspecialchars($row["author"]); ?></td>
                 <td>$<?= number_format($row["price"], 2); ?></td>
                 <td><?= htmlspecialchars($row["stock"]); ?></td>
+                 <td>
+                    <?php if ($row["image"]): ?>
+                        <img src="<?= htmlspecialchars($row["image"]); ?>" alt="<?= htmlspecialchars($row["title"]); ?>" style="width: 50px; height: auto;" data-toggle="modal" data-target="#imageModal" data-image="<?= htmlspecialchars($row["image"]); ?>" class="thumbnail">
+                    <?php else: ?>
+                        No Image
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <a href="manage_books.php?edit=<?= $row["id"]; ?>" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="manage_books.php?delete=<?= $row["id"]; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this book?');">Delete</a>
+                </td>
+            </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
                 
 

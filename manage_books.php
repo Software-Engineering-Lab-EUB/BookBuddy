@@ -42,6 +42,27 @@ if (isset($_GET['edit'])) {
         $category_id = (int) trim($_POST["category_id"]); // Ensure this is an integer
         $description = trim($_POST["description"]); // Get the description
 
+         // Handle image upload
+        if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+            $image = $_FILES['image'];
+            $imagePath = 'images/' . basename($image['name']);
+            move_uploaded_file($image['tmp_name'], $imagePath);
+
+            // Update the book with the new image
+            $stmt = $conn->prepare("UPDATE books SET title = ?, author = ?, price = ?, stock = ?, category_id = ?, image = ?, description = ? WHERE id = ?");
+            $stmt->bind_param("ssdisssi", $title, $author, $price, $stock, $category_id, $imagePath, $description, $book_id);
+        } else {
+            // If no new image is uploaded, just update the other fields
+            $stmt = $conn->prepare("UPDATE books SET title = ?, author = ?, price = ?, stock = ?, category_id = ?, description = ? WHERE id = ?");
+            $stmt->bind_param("ssdissi", $title, $author, $price, $stock, $category_id, $description, $book_id);
+        }
+
+        $stmt->execute();
+        header("Location: manage_books.php");
+        exit();
+    }
+}
+
  // Handle deleting a book
 if (isset($_GET['delete'])) {
     $book_id = $_GET['delete'];

@@ -106,6 +106,32 @@ $result = $conn->query("SELECT * FROM books");
 <div class="container mt-5">
     <h2 class="text-center">Manage Books</h2>
 
+    <!-- Add Book Form -->
+    <form method="post" enctype="multipart/form-data" class="mb-3">
+        <h4>Add New Book</h4>
+        <input type="text" name="title" class="form-control mb-2" required placeholder="Book Title">
+        <input type="text" name="author" class="form-control mb-2" required placeholder="Author">
+        <input type="number" name="price" class="form-control mb-2" required placeholder="Price" step="0.01">
+        <input type="number" name="stock" class="form-control mb-2" required placeholder="Stock">
+        <select name="category_id" class="form-control mb-2" required>
+            <option value="">Select Category</option>
+            <?php
+            $category_result = $conn->query("SELECT * FROM categories");
+            while ($category = $category_result->fetch_assoc()) {
+                echo "<option value='" . $category['category_id'] . "'>" . htmlspecialchars($category['category_name']) . "</option>";
+            }
+            ?>
+        </select>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+        </div>
+        <label for="image">Upload Image:</label>
+        <input type="file" name="image" class="form-control mb-2" accept="image/*" required>
+        <button type="submit" name="add_book" class="btn btn-primary w-100">Add Book</button>
+    </form>
+
+
 
 <!-- Book List -->
     <table class="table table-striped">

@@ -14,6 +14,14 @@ include "db.php";
     header("Location: manage_books.php");
     exit();
 
+// Fetch books from the database
+$result = $conn->query("SELECT * FROM books");
+?>
+
+<div class="container mt-5">
+    <h2 class="text-center">Manage Books</h2>
+
+
 <!-- Book List -->
     <table class="table table-striped">
         <thead>

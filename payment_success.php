@@ -24,5 +24,18 @@ $stmt = $conn->prepare("INSERT INTO orders (user_id, address, total_price, payme
 $stmt->bind_param("ssdsss", $user_id, $full_address, $total_price, $payment_method, $trxid, $mobile);
 $stmt->execute();
 $order_id = $conn->insert_id;
+// Insert each cart item into order_items
+foreach ($cart as $book_id => $qty) {
+    $stmt = $conn->prepare("SELECT price FROM books WHERE id = ?");
+    $stmt->bind_param("i", $book_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $book = $result->fetch_assoc();
+    $price = $book['price'];
+
+    $stmt = $conn->prepare("INSERT INTO order_items (order_id, book_id, quantity, price) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("iiii", $order_id, $book_id, $qty, $price);
+    $stmt->execute();
+}
 include "footer.php";
 ?>

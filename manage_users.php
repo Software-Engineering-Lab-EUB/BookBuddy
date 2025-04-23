@@ -41,6 +41,17 @@ if (isset($_GET['edit'])) {
     }
 }
 
+// Handle deleting a user
+if (isset($_GET['delete'])) {
+    $user_id = $_GET['delete'];
+    $stmt = $conn->prepare("DELETE FROM users WHERE id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    header("Location: manage_users.php");
+    exit();
+}
+
+
 // Fetch users from the database
 $result = $conn->query("SELECT * FROM users");
 ?>

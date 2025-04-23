@@ -37,5 +37,19 @@ foreach ($cart as $book_id => $qty) {
     $stmt->bind_param("iiii", $order_id, $book_id, $qty, $price);
     $stmt->execute();
 }
+// Clear cart and checkout session
+unset($_SESSION['cart']);
+unset($_SESSION['checkout_data']);
+
+// Show confirmation
+echo "<div class='container mt-5'>";
+echo "<div class='alert alert-success text-center'>";
+echo "<h4>Payment Successful!</h4>";
+echo "<p>Your order has been placed successfully.</p>";
+echo "<p><strong>Payment Method:</strong> $payment_method</p>";
+echo "<p><strong>Transaction ID:</strong> $trxid</p>";
+echo "<p><strong>Mobile:</strong> $mobile</p>";
+echo "<a href='orders.php' class='btn btn-primary mt-3'>Go to Orders</a>";
+echo "</div></div>";
 include "footer.php";
 ?>

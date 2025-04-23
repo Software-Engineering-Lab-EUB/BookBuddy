@@ -15,5 +15,8 @@ $full_address = $data['full_address'];
 $total_price = $data['total_price'];
 $payment_method = $_POST['payment_method'] ?? $data['payment_method'] ?? 'N/A';
 $cart = $data['cart'];
+// Get transaction ID and mobile from payment form
+$trxid = $_POST['trxid'] ?? 'N/A';
+$mobile = $_POST['mobile'] ?? 'N/A';
 include "footer.php";
 ?>

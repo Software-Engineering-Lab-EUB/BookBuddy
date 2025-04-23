@@ -18,5 +18,11 @@ $cart = $data['cart'];
 // Get transaction ID and mobile from payment form
 $trxid = $_POST['trxid'] ?? 'N/A';
 $mobile = $_POST['mobile'] ?? 'N/A';
+
+// Insert order into database
+$stmt = $conn->prepare("INSERT INTO orders (user_id, address, total_price, payment_method, transaction_id, mobile, status) VALUES (?, ?, ?, ?, ?, ?, 'pending')");
+$stmt->bind_param("ssdsss", $user_id, $full_address, $total_price, $payment_method, $trxid, $mobile);
+$stmt->execute();
+$order_id = $conn->insert_id;
 include "footer.php";
 ?>

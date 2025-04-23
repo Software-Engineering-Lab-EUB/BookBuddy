@@ -59,6 +59,19 @@ $result = $conn->query("SELECT * FROM users");
 <div class="container mt-5">
     <h2 class="text-center">Manage Users</h2>
 
+     <!-- Add User Form -->
+    <form method="post" class="mb-3">
+        <h4>Add New User</h4>
+        <input type="text" name="name" class="form-control mb-2" required placeholder="User  Name">
+        <input type="email" name="email" class="form-control mb-2" required placeholder="Email">
+        <input type="password" name="password" class="form-control mb-2" required placeholder="Password">
+        <select name="role" class="form-control mb-2" required>
+            <option value="user">User </option>
+            <option value="admin">Admin</option>
+        </select>
+        <button type="submit" name="add_user" class="btn btn-primary w-100">Add User</button>
+    </form>
+
  <!-- User List -->
     <table class="table table-striped">
         <thead>

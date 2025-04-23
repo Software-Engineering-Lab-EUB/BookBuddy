@@ -98,4 +98,17 @@ $result = $conn->query("SELECT * FROM users");
             <?php endwhile; ?>
         </tbody>
     </table>
-
+    
+ <!-- Edit User Form -->
+    <?php if (isset($_GET['edit'])): ?>
+        <h4>Edit User</h4>
+        <form method="post">
+            <input type="text" name="name" class="form-control mb-2" required placeholder="User  Name" value="<?= htmlspecialchars($user['name']); ?>">
+            <input type="email" name="email" class="form-control mb-2" required placeholder="Email" value="<?= htmlspecialchars($user['email']); ?>">
+            <select name="role" class="form-control mb-2" required>
+                <option value="user" <?= $user['role'] == 'user' ? 'selected' : ''; ?>>User </option>
+                <option value="admin" <?= $user['role'] == 'admin' ? 'selected' : ''; ?>>Admin</option>
+            </select>
+            <button type="submit" name="update_user" class="btn btn-primary w-100">Update User</button>
+        </form>
+    <?php endif; ?>

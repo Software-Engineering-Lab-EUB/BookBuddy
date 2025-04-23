@@ -7,6 +7,12 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
 include "header.php";
 include "db.php";
 
+// Fetch users from the database
+$result = $conn->query("SELECT * FROM users");
+?>
+
+<div class="container mt-5">
+    <h2 class="text-center">Manage Users</h2>
 
  <!-- User List -->
     <table class="table table-striped">

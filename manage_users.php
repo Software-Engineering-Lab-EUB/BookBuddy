@@ -7,6 +7,18 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
 include "header.php";
 include "db.php";
 
+// Handle adding a new user
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_user'])) {
+    $name = trim($_POST["name"]);
+    $email = trim($_POST["email"]);
+    $password = password_hash(trim($_POST["password"]), PASSWORD_DEFAULT);
+    $role = trim($_POST["role"]);
+
+    $stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $name, $email, $password, $role);
+    $stmt->execute();
+}
+
 // Fetch users from the database
 $result = $conn->query("SELECT * FROM users");
 ?>

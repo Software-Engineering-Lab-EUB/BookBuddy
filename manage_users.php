@@ -19,6 +19,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_user'])) {
     $stmt->execute();
 }
 
+// Handle editing a user
+if (isset($_GET['edit'])) {
+    $user_id = $_GET['edit'];
+    $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_user'])) {
+        $name = trim($_POST["name"]);
+        $email = trim($_POST["email"]);
+        $role = trim($_POST["role"]);
+
+        $stmt = $conn->prepare("UPDATE users SET name = ?, email = ?, role = ? WHERE id = ?");
+        $stmt->bind_param("sssi", $name, $email, $role, $user_id);
+        $stmt->execute();
+        header("Location: manage_users.php");
+        exit();
+    }
+}
+
 // Fetch users from the database
 $result = $conn->query("SELECT * FROM users");
 ?>

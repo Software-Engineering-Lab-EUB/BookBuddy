@@ -51,7 +51,6 @@ if (isset($_GET['delete'])) {
     exit();
 }
 
-
 // Fetch users from the database
 $result = $conn->query("SELECT * FROM users");
 ?>
@@ -59,7 +58,7 @@ $result = $conn->query("SELECT * FROM users");
 <div class="container mt-5">
     <h2 class="text-center">Manage Users</h2>
 
-     <!-- Add User Form -->
+    <!-- Add User Form -->
     <form method="post" class="mb-3">
         <h4>Add New User</h4>
         <input type="text" name="name" class="form-control mb-2" required placeholder="User  Name">
@@ -72,7 +71,7 @@ $result = $conn->query("SELECT * FROM users");
         <button type="submit" name="add_user" class="btn btn-primary w-100">Add User</button>
     </form>
 
- <!-- User List -->
+    <!-- User List -->
     <table class="table table-striped">
         <thead>
             <tr>
@@ -83,7 +82,7 @@ $result = $conn->query("SELECT * FROM users");
                 <th>Actions</th>
             </tr>
         </thead>
-      <tbody>
+        <tbody>
             <?php while ($row = $result->fetch_assoc()): ?>
             <tr>
                 <td><?= htmlspecialchars($row["id"]); ?></td>
@@ -98,8 +97,8 @@ $result = $conn->query("SELECT * FROM users");
             <?php endwhile; ?>
         </tbody>
     </table>
-    
- <!-- Edit User Form -->
+
+    <!-- Edit User Form -->
     <?php if (isset($_GET['edit'])): ?>
         <h4>Edit User</h4>
         <form method="post">
@@ -112,3 +111,6 @@ $result = $conn->query("SELECT * FROM users");
             <button type="submit" name="update_user" class="btn btn-primary w-100">Update User</button>
         </form>
     <?php endif; ?>
+</div>
+
+<?php include "footer.php"; ?>

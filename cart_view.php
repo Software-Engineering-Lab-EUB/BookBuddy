@@ -2,6 +2,7 @@
 session_start();
 include "db.php";
 include "header.php";
+?>
 
 <h2 class="text-center">Shopping Cart</h2>
 
@@ -28,5 +29,8 @@ if (!isset($_SESSION['cart']) || count($_SESSION['cart']) == 0) {
          }
      }
   }
+echo "<tr><td colspan='3'><strong>Total</strong></td><td><strong>\$$total_price</strong></td><td></td></tr>";
+echo '</table>';
 ?>
-?>
+    
+

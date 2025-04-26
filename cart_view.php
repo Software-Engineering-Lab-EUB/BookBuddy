@@ -31,6 +31,10 @@ if (!isset($_SESSION['cart']) || count($_SESSION['cart']) == 0) {
   }
 echo "<tr><td colspan='3'><strong>Total</strong></td><td><strong>\$$total_price</strong></td><td></td></tr>";
 echo '</table>';
+
+ // Checkout Button
+ echo '<a href="checkout.php" class="btn btn-success">Proceed to Checkout</a>';
+
 ?>
     
 

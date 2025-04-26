@@ -39,6 +39,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_profile'])) {
 </head>
 <body>
 <div class="container mt-5">
+     <h2>User Profile</h2>
+ <?php if (isset($success)): ?>
+     <div class="alert alert-success"><?= htmlspecialchars($success); ?></div>
+ <?php endif; ?>
+ <?php if (isset($error)): ?>
+     <div class="alert alert-danger"><?= htmlspecialchars($error); ?></div>
+ <?php endif; ?>
  </div>
 </body>
 </html>

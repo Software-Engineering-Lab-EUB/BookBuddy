@@ -26,6 +26,12 @@ if (isset($_GET['delete_id'])) {
         if ($order['status'] === 'completed') {
             echo "<p>You cannot delete a completed order. Please contact an admin if you need assistance.</p>";
         } else {
+               // Delete the order and its associated items
+             $conn->query("DELETE FROM order_items WHERE order_id = $order_id");
+             $conn->query("DELETE FROM orders WHERE id = $order_id");
+               // Redirect back to orders page with a success message
+             header("Location: orders.php?message=Order deleted successfully.");
+             exit();
         }
     } else {
         echo "<p>Order not found or you do not have permission to delete this order.</p>";

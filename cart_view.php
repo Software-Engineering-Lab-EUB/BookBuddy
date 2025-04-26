@@ -34,7 +34,8 @@ echo '</table>';
 
  // Checkout Button
  echo '<a href="checkout.php" class="btn btn-success">Proceed to Checkout</a>';
-
 ?>
+
+<?php include "footer.php"; ?>
     
 

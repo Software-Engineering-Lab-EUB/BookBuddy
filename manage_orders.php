@@ -20,3 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_order'])) {
         echo "<p class='alert alert-danger text-center'>Error updating order status.</p>";
     }
 }
+
+// Handle deleting an order
+if (isset($_GET['delete'])) {
+    $order_id = $_GET['delete'];
+    $stmt = $conn->prepare("DELETE FROM orders WHERE order_id = ?");
+    $stmt->bind_param("i", $order_id);
+    $stmt->execute();
+    header("Location: manage_orders.php");
+    exit();
+}

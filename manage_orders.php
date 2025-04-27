@@ -38,3 +38,15 @@ $result = $conn->query("SELECT o.order_id, u.name AS user_name, o.total_price, o
 <div class="container mt-5">
     <h2 class="text-center">Manage Orders</h2>
 
+    <!-- Order List -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+

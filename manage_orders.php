@@ -7,3 +7,16 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
 include "header.php";
 include "db.php";
 
+// Handle updating an order status
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_order'])) {
+    $order_id = $_POST['order_id'];
+    $status = $_POST['status'];
+
+    $stmt = $conn->prepare("UPDATE orders SET status = ? WHERE order_id = ?");
+    $stmt->bind_param("si", $status, $order_id);
+    if ($stmt->execute()) {
+        echo "<p class='alert alert-success text-center'>Order status updated successfully!</p>";
+    } else {
+        echo "<p class='alert alert-danger text-center'>Error updating order status.</p>";
+    }
+}

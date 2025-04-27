@@ -49,4 +49,17 @@ $result = $conn->query("SELECT o.order_id, u.name AS user_name, o.total_price, o
                 <th>Actions</th>
             </tr>
         </thead>
+         <tbody>
+            <?php while ($row = $result->fetch_assoc()): ?>
+            <tr>
+                <td><?= htmlspecialchars($row["order_id"]); ?></td>
+                <td><?= htmlspecialchars($row["user_name"]); ?></td>
+                <td>$<?= number_format($row["total_price"], 2); ?></td>
+                <td>
+                    <form method="post" class="d-inline">
+                        <select name="status" class="form-control form-control-sm" required>
+                            <option value="pending" <?= $row["status"] == 'pending' ? 'selected' : ''; ?>>Pending</option>
+                            <option value="completed" <?= $row["status"] == 'completed' ? 'selected' : ''; ?>>Completed</option>
+                            <option value="canceled" <?= $row["status"] == 'canceled' ? 'selected' : ''; ?>>Canceled</option>
+                        </select>
 

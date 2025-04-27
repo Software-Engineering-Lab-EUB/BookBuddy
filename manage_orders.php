@@ -63,3 +63,18 @@ $result = $conn->query("SELECT o.order_id, u.name AS user_name, o.total_price, o
                             <option value="canceled" <?= $row["status"] == 'canceled' ? 'selected' : ''; ?>>Canceled</option>
                         </select>
 
+                        <input type="hidden" name="order_id" value="<?= $row["order_id"]; ?>">
+                        <button type="submit" name="update_order" class="btn btn-primary btn-sm">Update</button>
+                    </form>
+                </td>
+                <td>
+                    <a href="manage_orders.php?delete=<?= $row["order_id"]; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this order?');">Delete</a>
+                </td>
+            </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+</div>
+
+<?php include "footer.php"; ?>
+

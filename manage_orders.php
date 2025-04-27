@@ -30,3 +30,11 @@ if (isset($_GET['delete'])) {
     header("Location: manage_orders.php");
     exit();
 }
+
+// Fetch orders from the database
+$result = $conn->query("SELECT o.order_id, u.name AS user_name, o.total_price, o.status FROM orders o JOIN users u ON o.user_id = u.id");
+?>
+
+<div class="container mt-5">
+    <h2 class="text-center">Manage Orders</h2>
+

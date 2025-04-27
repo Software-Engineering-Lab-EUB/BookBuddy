@@ -49,7 +49,7 @@ $result = $conn->query("SELECT o.order_id, u.name AS user_name, o.total_price, o
                 <th>Actions</th>
             </tr>
         </thead>
-         <tbody>
+        <tbody>
             <?php while ($row = $result->fetch_assoc()): ?>
             <tr>
                 <td><?= htmlspecialchars($row["order_id"]); ?></td>
@@ -62,7 +62,6 @@ $result = $conn->query("SELECT o.order_id, u.name AS user_name, o.total_price, o
                             <option value="completed" <?= $row["status"] == 'completed' ? 'selected' : ''; ?>>Completed</option>
                             <option value="canceled" <?= $row["status"] == 'canceled' ? 'selected' : ''; ?>>Canceled</option>
                         </select>
-
                         <input type="hidden" name="order_id" value="<?= $row["order_id"]; ?>">
                         <button type="submit" name="update_order" class="btn btn-primary btn-sm">Update</button>
                     </form>
@@ -77,4 +76,3 @@ $result = $conn->query("SELECT o.order_id, u.name AS user_name, o.total_price, o
 </div>
 
 <?php include "footer.php"; ?>
-

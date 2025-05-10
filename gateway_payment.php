@@ -9,6 +9,7 @@ if (!isset($_SESSION['checkout_data'])) {
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +18,7 @@ if (!isset($_SESSION['checkout_data'])) {
     <title>Simulated Payment Gateway</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* All the CSS styles here */
-          /* General Body Styles */
+        /* General Body Styles */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f9;
@@ -140,9 +140,9 @@ if (!isset($_SESSION['checkout_data'])) {
             box-sizing: border-box;
         }
     </style>
-    </style>
 </head>
 <body>
+
 <div class="container mt-5" style="max-width: 600px;">
     <h3 class="text-center mb-4">Simulated Payment Gateway</h3>
 
@@ -184,11 +184,12 @@ if (!isset($_SESSION['checkout_data'])) {
         <button type="submit" id="normal-submit" class="btn btn-success w-100">Pay Now</button>
     </form>
 </div>
-    <!-- Include Stripe.js -->
+
+<!-- Include Stripe.js -->
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
-    var stripe = Stripe('pk_test_...'); // Your Stripe test key
+    var stripe = Stripe('pk_test_51RLpl6Q1NZRl7ka9Jk91jguiySsFciINA8mXEm7trSDr3EFYAQmYdaNo0F8tG6EOXMxg5Ea1YlfVXHwJCotNJCzz00hdtqKsyz');
     var elements = stripe.elements();
 
     var style = {
@@ -211,6 +212,7 @@ if (!isset($_SESSION['checkout_data'])) {
     var card = elements.create('card', { style: style, hidePostalCode: true });
     card.mount('#card-element');
 
+    // Show/hide Stripe form based on payment method selection
     document.getElementById('payment_method').addEventListener('change', function () {
         var stripeForm = document.getElementById('stripe-form');
         var normalSubmit = document.getElementById('normal-submit');
@@ -224,6 +226,7 @@ if (!isset($_SESSION['checkout_data'])) {
         }
     });
 
+    // Handle Stripe payment button click
     document.getElementById('stripe-submit').addEventListener('click', function (event) {
         event.preventDefault();
 
@@ -232,21 +235,25 @@ if (!isset($_SESSION['checkout_data'])) {
             card: card,
         }).then(function (result) {
             if (result.error) {
+                // Show error
                 document.getElementById('card-errors').textContent = result.error.message;
             } else {
+                // Create hidden input with PaymentMethod ID
                 var form = document.getElementById('payment-form');
                 var paymentMethodInput = document.createElement('input');
                 paymentMethodInput.type = 'hidden';
                 paymentMethodInput.name = 'payment_method_id';
                 paymentMethodInput.value = result.paymentMethod.id;
                 form.appendChild(paymentMethodInput);
+
+                // Submit form
                 form.submit();
             }
         });
     });
 </script>
-    <?php include "footer.php"; ?>
+
+<?php include "footer.php"; ?>
+
 </body>
 </html>
-
-

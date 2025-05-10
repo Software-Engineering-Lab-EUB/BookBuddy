@@ -19,97 +19,150 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["email"] = $row["email"];
             $_SESSION["role"] = $row["role"] ?? "user";
 
-            if ($_SESSION["role"] === "admin") {
-                header("Location: index.php");
-            } else {
-                header("Location: index.php");
-            }
+            header("Location: index.php");
             exit();
         } else {
-            echo "<div class='container mt-3'><div class='alert alert-danger text-center'>Incorrect password.</div></div>";
+            $error = "Incorrect password.";
         }
     } else {
-        echo "<div class='container mt-3'><div class='alert alert-danger text-center'>Email not found.</div></div>";
+        $error = "Email not found.";
     }
 }
 ?>
 
 <style>
     body {
-        font-family: 'Inter', sans-serif;
-        background: linear-gradient(to right, #667eea, #764ba2);
-        min-height: 100vh;
-        margin: 0;
-        padding: 0;
+        background-color: #f2f4f7;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    .login-card {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
-        border-radius: 20px;
-        padding: 30px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        color: #fff;
-        max-width: 400px;
-        width: 100%;
-        animation: slideUp 0.6s ease-out;
+
+    .form-card {
+        background-color: #ffffff;
+        border-radius: 16px;
+        padding: 40px;
+        max-width: 450px;
+        margin: 50px auto;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     }
-    @keyframes slideUp {
-        from {
-            transform: translateY(20px);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-    .login-card input {
-        border-radius: 12px;
-        border: none;
-        padding: 12px;
-    }
-    .login-card input:focus {
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
-    }
-    .login-btn {
-        background: #fff;
-        color: #764ba2;
+
+    .form-card h2 {
+        font-size: 30px;
         font-weight: bold;
-        border-radius: 12px;
-        transition: 0.3s;
+        color: #1f2937;
+        margin-bottom: 5px;
     }
-    .login-btn:hover {
-        background: #f0f0f0;
-        color: #333;
+
+    .form-card p {
+        color: #4b5563;
+        margin-bottom: 25px;
     }
+
     .form-label {
         font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .btn-login {
+        width: 100%;
+        background-color: #10b981;
+        color: #fff;
+        font-weight: bold;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-login:hover {
+        background-color: #059669;
+    }
+
+    .google-btn {
+        width: 100%;
+        background-color: #4f46e5;
+        color: #fff;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-decoration: none;
+    }
+
+    .google-btn:hover {
+        background-color: #4338ca;
+    }
+
+    .redirect-links {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .redirect-links a {
+        color: #10b981;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 5px;
+    }
+
+    .redirect-links a:hover {
+        text-decoration: underline;
+    }
+
+    .form-icon {
+        font-size: 3rem;
+        color: #1f2937;
+        margin-bottom: 10px;
     }
 </style>
 
-<div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
-    <div class="login-card text-center">
-        <div class="mb-4">
-            <i class="fas fa-user-circle fa-3x mb-2"></i>
-            <h2 class="fw-bold">Sign In</h2>
-            <p class="mb-0">Welcome back! Please login to continue</p>
-        </div>
-        <form method="post">
-            <div class="mb-3 text-start">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" name="email" class="form-control" required placeholder="example@email.com">
-            </div>
-            <div class="mb-3 text-start">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" required placeholder="••••••••">
-            </div>
-            <div class="d-grid mb-3">
-                <button type="submit" class="btn login-btn">Login</button>
-            </div>
-            <small>Don’t have an account? <a href="register.php" style="color: #fff; text-decoration: underline;">Register here</a></small>
-        </form>
+<div class="form-card text-center">
+    <div class="form-icon">
+        <i class="fas fa-user-circle"></i>
     </div>
+    <h2>Sign In</h2>
+    <p>Welcome back! Please login to continue</p>
+
+    <?php if (!empty($error)) : ?>
+        <div class="alert alert-danger"><?= $error ?></div>
+    <?php endif; ?>
+
+    <form method="post">
+        <div class="text-start">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" name="email" class="form-control" placeholder="example@email.com" required>
+
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" class="btn-login">Login</button>
+    </form>
+
+    <div class="redirect-links">
+        <small>Don’t have an account?</small>
+        <a href="register.php">Register here</a>
+    </div>
+
+
+      
+      <button type="button" onclick="window.location.href='google_login.php'" class="btn google-btn">
+        <i class="fab fa-google"></i> Sign Up with Google
+    
+    
+   
 </div>
 
 <?php include "footer.php"; ?>

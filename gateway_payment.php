@@ -62,3 +62,65 @@ if (!isset($_SESSION['checkout_data'])) {
         <button type="submit" id="normal-submit" class="btn btn-success w-100">Pay Now</button>
     </form>
 </div>
+    <!-- Include Stripe.js -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    var stripe = Stripe('pk_test_...'); // Your Stripe test key
+    var elements = stripe.elements();
+
+    var style = {
+        base: {
+            iconColor: '#666EE8',
+            color: '#31325F',
+            fontWeight: '400',
+            fontFamily: 'Helvetica Neue, Helvetica, sans-serif',
+            fontSize: '16px',
+            '::placeholder': {
+                color: '#CFD7E0'
+            }
+        },
+        invalid: {
+            iconColor: '#e85746',
+            color: '#e85746'
+        }
+    };
+
+    var card = elements.create('card', { style: style, hidePostalCode: true });
+    card.mount('#card-element');
+
+    document.getElementById('payment_method').addEventListener('change', function () {
+        var stripeForm = document.getElementById('stripe-form');
+        var normalSubmit = document.getElementById('normal-submit');
+
+        if (this.value === 'stripe') {
+            stripeForm.style.display = 'block';
+            normalSubmit.style.display = 'none';
+        } else {
+            stripeForm.style.display = 'none';
+            normalSubmit.style.display = 'block';
+        }
+    });
+
+    document.getElementById('stripe-submit').addEventListener('click', function (event) {
+        event.preventDefault();
+
+        stripe.createPaymentMethod({
+            type: 'card',
+            card: card,
+        }).then(function (result) {
+            if (result.error) {
+                document.getElementById('card-errors').textContent = result.error.message;
+            } else {
+                var form = document.getElementById('payment-form');
+                var paymentMethodInput = document.createElement('input');
+                paymentMethodInput.type = 'hidden';
+                paymentMethodInput.name = 'payment_method_id';
+                paymentMethodInput.value = result.paymentMethod.id;
+                form.appendChild(paymentMethodInput);
+                form.submit();
+            }
+        });
+    });
+</script>
+

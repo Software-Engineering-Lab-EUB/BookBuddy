@@ -15,3 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user_id, '$address', '$payment_method', $total_price
     )");
     $order_id = $conn->insert_id;
+    foreach ($_SESSION['cart'] as $book_id => $qty) {
+        $book = $conn->query("SELECT price FROM books WHERE id = $book_id")->fetch_assoc();
+        $price = $book['price'];
+        $conn->query("INSERT INTO order_items (order_id, book_id, quantity, price) VALUES (
+            $order_id, $book_id, $qty, $price
+        )");
+    }

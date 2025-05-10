@@ -22,3 +22,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $order_id, $book_id, $qty, $price
         )");
     }
+    unset($_SESSION['cart']); // Clear cart after order
+    echo "<div class='container'><h4>✅ Order placed successfully! Order ID: $order_id</h4></div>";

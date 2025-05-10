@@ -123,4 +123,8 @@ if (!isset($_SESSION['checkout_data'])) {
         });
     });
 </script>
+    <?php include "footer.php"; ?>
+</body>
+</html>
+
 

@@ -13,3 +13,15 @@ if (isset($_GET['id'])) {
     $stmt->execute();
     $result = $stmt->get_result();
 
+    // Check if the book exists
+    if ($result->num_rows > 0) {
+        $book = $result->fetch_assoc();
+    } else {
+        echo "<p class='text-center'>Book not found.</p>";
+        exit;
+    }
+} else {
+    echo "<p class='text-center'>No book selected.</p>";
+    exit;
+}
+?>

@@ -109,7 +109,7 @@ Replace the test keys in gateway_payment.php and related files.
 Run Locally
 Start a local server (e.g., XAMPP, MAMP).
 
-Access the project via http://localhost/bookbuddy/index.php.
+Access the project via http://localhost/BookStore/index.php.
 
 💸 Promo Codes
 Code	Discount

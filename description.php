@@ -35,3 +35,18 @@ if (isset($_GET['id'])) {
     <title><?= htmlspecialchars($book['title']); ?> - Book Details</title>
 </head>
 <body>
+
+    <div class="container mt-5">
+    <h2 class="text-center"><?= htmlspecialchars($book['title']); ?></h2>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="<?= htmlspecialchars($book['image']); ?>" alt="<?= htmlspecialchars($book['title']); ?>" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <h5>Author: <?= htmlspecialchars($book['author']); ?></h5>
+            <p>Price: $<?= htmlspecialchars($book['price']); ?></p>
+            <p>Description: <?= htmlspecialchars($book['description'] ?? 'No description available.'); ?></p>
+            <a href="cart.php?id=<?= $book['id']; ?>" class="btn btn-primary">Add to Cart</a>
+        </div>
+    </div>
+</div>

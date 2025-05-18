@@ -24,5 +24,28 @@ if (isset($_GET['delete_id'])) {
 
 include 'header.php';
 ?>
+<!-- extract order list container and heading into partial -->
+<div class="container mt-5">
+    <h2 class="text-center mb-4">My Orders</h2>
+    <div class="table-responsive">
+<!--separate order table headers for reuse and clarity -->
+        <table class="table table-bordered shadow-sm">
+    <thead class="thead-dark">
+        <tr>
+            <th>Order ID</th>
+            <th>Status</th>
+            <th>Ordered On</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+<!-- move order fetching logic to includes/fetch_orders.php -->
+<?php
+$stmt = $conn->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+?>
+
 
    

@@ -92,8 +92,27 @@ $stmt->bind_param("i", $book_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
+// display book reviews with rating stars and fallback message if empty
+if ($result->num_rows > 0) {
+    while ($review = $result->fetch_assoc()) {
+        echo "<div class='col-md-6'>";
+        echo "<div class='card review-card shadow-sm mb-3'>";
+        echo "<div class='card-body'>";
+        echo "<div class='d-flex align-items-center'>";
+        echo "<i class='fas fa-user-circle profile-icon'></i>";
+        echo "<h5 class='card-title'>" . htmlspecialchars($review["username"]) . "</h5>";
+        echo "</div>";
+        echo "<h6 class='card-subtitle mb-2 text-muted'>Rating: " . str_repeat('⭐', $review["rating"]) . "</h6>";
+        echo "<p class='card-text'><strong>Comment:</strong> " . nl2br(htmlspecialchars($review["review"])) . "</p>";
+        echo "</div></div></div>";
+    }
+} else {
+    echo "<p class='col-12'>No reviews yet.</p>";
+         }
+     ?>
+     </div>
+</div>
 
-?>
 
 
 

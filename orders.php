@@ -87,6 +87,15 @@ if (in_array($order['status'], ['pending', 'cancelled'])) {
     echo "<span class='text-muted d-block mt-2'>Cannot delete</span>";
    }
 ?>
+<!-- display message when no orders are found --> 
+           <?php 
+         endwhile;
+      else:
+          ?>
+          <tr>
+               <td colspan="4" class="text-center">No orders found.</td>
+           </tr>
+        <?php endif; ?>
 
     
 

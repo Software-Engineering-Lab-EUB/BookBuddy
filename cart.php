@@ -18,4 +18,9 @@ if (isset($_GET['id'])) {
         $_SESSION['cart'][$book_id] = 1;
     }
 
+    // redirect user to cart view after adding item
+        header("Location: cart_view.php");
+    exit();
+}
 ?>
+

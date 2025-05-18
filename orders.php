@@ -58,6 +58,9 @@ $result = $stmt->get_result();
         </span>
     </td>
     <td><?= date("F j, Y, g:i a", strtotime($order['created_at'])) ?></td>
+<!-- add view details button linking to order_details.php -->
+        <a href="order_details.php?id=<?= $order['id'] ?>" class="btn btn-info btn-sm mb-2">View Details</a>
+
 
 
    

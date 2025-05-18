@@ -24,5 +24,9 @@ if (isset($_GET['delete_id'])) {
 
 include 'header.php';
 ?>
+<!-- extract order list container and heading into partial -->
+<div class="container mt-5">
+    <h2 class="text-center mb-4">My Orders</h2>
+    <div class="table-responsive">
 
    

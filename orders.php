@@ -74,9 +74,14 @@ $result = $stmt->get_result();
       $book_stmt->bind_param("i", $order_id);
       $book_stmt->execute();
       $book_result = $book_stmt->get_result();
+  // display review button for each book in completed order
+      while ($book = $book_result->fetch_assoc()) {
+        echo "<a href='description.php?id={$book['id']}' class='btn btn-success btn-sm mb-1'>Review \"{$book['title']}\"</a><br>";
+    }
+}
+?>
 
     
-      ?>
 
 
 

@@ -56,6 +56,18 @@ if (isset($_SESSION['user_id'])) {
 include "header.php";
 ?>
 
+<!--display book title and image section in description page -->
+<div class="container mt-5">
+    <h2 class="text-center mb-4"><?= htmlspecialchars($book["title"]); ?></h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <img src="<?= htmlspecialchars($book['image'] ?? 'Lore.jpg'); ?>" class="card-img-top" alt="<?= htmlspecialchars($book['title']); ?>">
+        </div>
+
+
+
+
 
 
 

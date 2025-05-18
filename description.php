@@ -23,5 +23,12 @@ if ($result->num_rows == 0) {
 }
 $book = $result->fetch_assoc();
 
+//  Check if user can review
+//  review eligibility flag and fetch user ID from session
+$can_review = false;
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+
+
 
 

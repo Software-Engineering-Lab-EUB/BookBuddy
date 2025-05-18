@@ -9,12 +9,19 @@ if ($book_id <= 0) {
     echo "Invalid book ID.";
     exit;
 }
-
+// // Fetch book data
 // prepare and execute query to fetch book by ID
 $query = "SELECT * FROM books WHERE id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $book_id);
 $stmt->execute();
 $result = $stmt->get_result();
+// handle case where book is not found and fetch book data
+if ($result->num_rows == 0) {
+    echo "Book not found.";
+    exit;
+}
+$book = $result->fetch_assoc();
+
 
 

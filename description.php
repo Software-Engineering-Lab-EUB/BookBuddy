@@ -147,6 +147,15 @@ if ($result->num_rows > 0) {
     <p class="mt-3 text-muted">You must complete the book delivery before submitting a new review or you’ve already reviewed all your purchases.</p>
 <?php endif; ?>
 </div>
+
+<!-- add redirectToLogin function to prompt login alert and redirect -->
+<script>
+function redirectToLogin() {
+    alert("You are not logged in. Please log in first.");
+    window.location.href = "login.php";
+}
+</script>
+
          
 
 

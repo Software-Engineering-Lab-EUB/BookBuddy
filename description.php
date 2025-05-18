@@ -64,6 +64,19 @@ include "header.php";
         <div class="col-md-6">
             <img src="<?= htmlspecialchars($book['image'] ?? 'Lore.jpg'); ?>" class="card-img-top" alt="<?= htmlspecialchars($book['title']); ?>">
         </div>
+<!-- render book details and conditionally show Add to Cart button -->
+                <div class="col-md-6">
+            <p><strong>Author:</strong> <?= htmlspecialchars($book["author"]); ?></p>
+            <p><strong>Price:</strong> $<?= htmlspecialchars($book["price"]); ?></p>
+            <p><strong>Description:</strong> <?= nl2br(htmlspecialchars($book["description"])); ?></p>
+
+            <?php if (isset($_SESSION["user_id"])): ?>
+                <a href="cart.php?id=<?= $book["id"]; ?>" class="btn btn-primary">Add to Cart</a>
+            <?php else: ?>
+                <button class="btn btn-warning" onclick="redirectToLogin();">Add to Cart</button>
+            <?php endif; ?>
+        </div>
+    </div>
 
 
 

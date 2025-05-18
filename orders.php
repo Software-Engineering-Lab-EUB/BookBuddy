@@ -45,6 +45,9 @@ $stmt = $conn->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY created_
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
+// add loop to iterate and display user orders if available
+ if ($result->num_rows > 0):
+     while ($order = $result->fetch_assoc()):
 ?>
 
 

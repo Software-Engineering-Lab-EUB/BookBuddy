@@ -78,6 +78,12 @@ include "header.php";
         </div>
     </div>
 
+<!-- add review section heading and layout container -->
+    <div class="mt-5">
+    <h4><i class="fas fa-comments"></i> Reviews</h4>
+    <div class="row">
+
+
 
 
 

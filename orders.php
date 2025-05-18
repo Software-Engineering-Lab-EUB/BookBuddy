@@ -39,6 +39,13 @@ include 'header.php';
         </tr>
     </thead>
     <tbody>
+<!-- move order fetching logic to includes/fetch_orders.php -->
+<?php
+$stmt = $conn->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+?>
 
 
    

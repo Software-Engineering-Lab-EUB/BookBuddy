@@ -45,7 +45,77 @@ $stmt = $conn->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY created_
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
+// add loop to iterate and display user orders if available
+ if ($result->num_rows > 0):
+     while ($order = $result->fetch_assoc()):
 ?>
+<!-- display order ID, status with badge, and formatted order date -->
+    <tr>
+    <td>#<?= $order['id'] ?></td>
+    <td>
+        <span class="badge badge-<?= $order['status'] === 'completed' ? 'success' : ($order['status'] === 'pending' ? 'warning' : 'secondary') ?>">
+            <?= ucfirst($order['status']) ?>
+        </span>
+    </td>
+    <td><?= date("F j, Y, g:i a", strtotime($order['created_at'])) ?></td>
+<!-- add view details button linking to order_details.php -->
+        <a href="order_details.php?id=<?= $order['id'] ?>" class="btn btn-info btn-sm mb-2">View Details</a>
+<!-- fetch book list for completed orders using prepared statement -->
+        <?php
+        if ($order['status'] === 'completed') {
+            $order_id = $order['id'];
+
+      $book_stmt = $conn->prepare("
+           SELECT b.id, b.title
+           FROM order_items oi
+           JOIN books b ON oi.book_id = b.id
+            WHERE oi.order_id = ?
+         ");
+      $book_stmt->bind_param("i", $order_id);
+      $book_stmt->execute();
+      $book_result = $book_stmt->get_result();
+        
+  // display review button for each book in completed order
+      while ($book = $book_result->fetch_assoc()) {
+        echo "<a href='description.php?id={$book['id']}' class='btn btn-success btn-sm mb-1'>Review \"{$book['title']}\"</a><br>";
+    }
+}
+// add delete button for pending and cancelled orders with confirmation
+if (in_array($order['status'], ['pending', 'cancelled'])) {
+    echo "<a href='orders.php?delete_id={$order['id']}' class='btn btn-danger btn-sm mt-2' onclick=\"return confirm('Are you sure you want to delete this order?');\">Delete</a>";
+} else {
+    echo "<span class='text-muted d-block mt-2'>Cannot delete</span>";
+   }
+?>
+<!-- display message when no orders are found --> 
+           <?php 
+         endwhile;
+      else:
+          ?>
+<!-- display message when no orders are found -->
+          <tr>
+               <td colspan="4" class="text-center">No orders found.</td>
+           </tr>
+        <?php endif; ?>
+<!-- include Bootstrap and FontAwesome for styling and interactivity -->
+             </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Scripts -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+
+<?php include 'footer.php';?>
+
+    
+
+    
+
 
 
    

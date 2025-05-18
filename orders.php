@@ -60,6 +60,23 @@ $result = $stmt->get_result();
     <td><?= date("F j, Y, g:i a", strtotime($order['created_at'])) ?></td>
 <!-- add view details button linking to order_details.php -->
         <a href="order_details.php?id=<?= $order['id'] ?>" class="btn btn-info btn-sm mb-2">View Details</a>
+<!-- fetch book list for completed orders using prepared statement -->
+        <?php
+        if ($order['status'] === 'completed') {
+            $order_id = $order['id'];
+
+      $book_stmt = $conn->prepare("
+           SELECT b.id, b.title
+           FROM order_items oi
+           JOIN books b ON oi.book_id = b.id
+            WHERE oi.order_id = ?
+         ");
+      $book_stmt->bind_param("i", $order_id);
+      $book_stmt->execute();
+      $book_result = $book_stmt->get_result();
+
+    
+      ?>
 
 
 

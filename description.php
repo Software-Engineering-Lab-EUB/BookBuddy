@@ -113,6 +113,10 @@ if ($result->num_rows > 0) {
      </div>
 </div>
 
+<!-- conditionally display review form based on user's eligibility -->
+<?php if ($can_review): ?>
+
+
 
 
 

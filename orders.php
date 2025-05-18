@@ -28,5 +28,17 @@ include 'header.php';
 <div class="container mt-5">
     <h2 class="text-center mb-4">My Orders</h2>
     <div class="table-responsive">
+<!--separate order table headers for reuse and clarity -->
+        <table class="table table-bordered shadow-sm">
+    <thead class="thead-dark">
+        <tr>
+            <th>Order ID</th>
+            <th>Status</th>
+            <th>Ordered On</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
 
    

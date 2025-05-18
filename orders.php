@@ -49,6 +49,15 @@ $result = $stmt->get_result();
  if ($result->num_rows > 0):
      while ($order = $result->fetch_assoc()):
 ?>
+<!-- display order ID, status with badge, and formatted order date -->
+    <tr>
+    <td>#<?= $order['id'] ?></td>
+    <td>
+        <span class="badge badge-<?= $order['status'] === 'completed' ? 'success' : ($order['status'] === 'pending' ? 'warning' : 'secondary') ?>">
+            <?= ucfirst($order['status']) ?>
+        </span>
+    </td>
+    <td><?= date("F j, Y, g:i a", strtotime($order['created_at'])) ?></td>
 
 
    

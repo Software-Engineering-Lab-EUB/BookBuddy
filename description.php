@@ -47,6 +47,15 @@ if (isset($_SESSION['user_id'])) {
     $stmt->execute();
     $result = $stmt->get_result();
     $user_reviews = $result->fetch_assoc()['user_reviews'] ?? 0;
+    
+//  determine review eligibility based on order and review count
+        if ($completed_orders > $user_reviews) {
+        $can_review = true;
+    }
+}
+include "header.php";
+?>
+
 
 
 

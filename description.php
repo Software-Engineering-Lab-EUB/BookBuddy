@@ -125,6 +125,12 @@ if ($result->num_rows > 0) {
 
 
 
+                <!-- star -->
+                <div class="form-group">
+                    <label for="rating">Rating (1 to 5 stars):</label>
+                    <input type="number" id="rating" name="rating" min="1" max="5" class="form-control" required>
+                </div>
+
 
 
 

@@ -82,6 +82,19 @@ include "header.php";
     <div class="mt-5">
     <h4><i class="fas fa-comments"></i> Reviews</h4>
     <div class="row">
+<!-- prepare and execute query to fetch reviews and usernames for a book -->
+    <?php
+        $query = "SELECT r.rating, r.review, u.name AS username FROM reviews r 
+          JOIN users u ON r.user_id = u.id 
+          WHERE r.book_id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $book_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+
+?>
+
 
 
 

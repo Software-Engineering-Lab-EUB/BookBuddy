@@ -142,6 +142,13 @@ if ($result->num_rows > 0) {
         </div>
     </div> 
 
+<!-- add message for users who cannot submit review yet -->
+      <?php else: ?>
+    <p class="mt-3 text-muted">You must complete the book delivery before submitting a new review or you’ve already reviewed all your purchases.</p>
+<?php endif; ?>
+</div>
+         
+
 
 
 

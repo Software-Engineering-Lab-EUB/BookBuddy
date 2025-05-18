@@ -130,8 +130,17 @@ if ($result->num_rows > 0) {
                     <label for="rating">Rating (1 to 5 stars):</label>
                     <input type="number" id="rating" name="rating" min="1" max="5" class="form-control" required>
                 </div>
-
-
+                
+                  <!-- review -->
+                    <div class="form-group">
+                        <label for="review">Review:</label>
+                        <textarea id="review" name="review" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div> 
 
 
 

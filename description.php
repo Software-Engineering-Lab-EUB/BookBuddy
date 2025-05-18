@@ -115,6 +115,14 @@ if ($result->num_rows > 0) {
 
 <!-- conditionally display review form based on user's eligibility -->
 <?php if ($can_review): ?>
+<!-- start review form with book ID hidden input -->
+   <div class="mt-5">
+    <h4><i class="fas fa-pen"></i> Leave a Review</h4>
+    <div class="card shadow">
+        <div class="card-body">
+            <form action="submit_review.php" method="POST">
+                <input type="hidden" name="book_id" value="<?= htmlspecialchars($book_id); ?>">
+
 
 
 

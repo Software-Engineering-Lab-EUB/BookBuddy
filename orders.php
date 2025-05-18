@@ -92,10 +92,13 @@ if (in_array($order['status'], ['pending', 'cancelled'])) {
          endwhile;
       else:
           ?>
+<!-- display message when no orders are found -->
           <tr>
                <td colspan="4" class="text-center">No orders found.</td>
            </tr>
         <?php endif; ?>
+
+    
 
     
 

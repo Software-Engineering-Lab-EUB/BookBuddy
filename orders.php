@@ -97,6 +97,20 @@ if (in_array($order['status'], ['pending', 'cancelled'])) {
                <td colspan="4" class="text-center">No orders found.</td>
            </tr>
         <?php endif; ?>
+<!-- include Bootstrap and FontAwesome for styling and interactivity -->
+             </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Scripts -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+
+<?php include 'footer.php';?>
 
     
 

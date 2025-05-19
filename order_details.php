@@ -20,6 +20,8 @@ $stmt = $conn->prepare("
     JOIN books b ON oi.book_id = b.id
     WHERE o.id = ?
 ");
+// Bind order ID parameter to the prepared SQL statement.
+$stmt->bind_param("i", $order_id);
 
 
 

@@ -1,3 +1,4 @@
+<?php
 session_start();
 include "db.php"; // Include your database connection
 
@@ -47,9 +48,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "You have already submitted all reviews for this book based on your completed orders.";
         exit;
     }
+<!-- Insert review into database and redirect to book description. -->
+    $query = "INSERT INTO reviews (book_id, user_id, rating, review) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("iiis", $book_id, $user_id, $rating, $review);
 
+    if ($stmt->execute()) {
+        header("Location: description.php?id=" . $book_id); // Redirect back to book description page
+        exit;
+    } else {
+        echo "There was an error submitting your review: " . $stmt->error;
+    }
+}
 
-
+?>
 
 
 

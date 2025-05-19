@@ -42,6 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = $stmt->get_result();
     $review_count = $result->fetch_assoc()['review_count'] ?? 0;
 
+<!-- Prevent review submission if user has already reviewed as many times as completed orders. -->
+            if ($review_count >= $completed_orders) {
+        echo "You have already submitted all reviews for this book based on your completed orders.";
+        exit;
+    }
+
+
 
 
 

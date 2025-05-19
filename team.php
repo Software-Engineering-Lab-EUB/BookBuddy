@@ -48,6 +48,18 @@ include "header.php";
     </div>
   </div>
 </div>
+<!--Add individual team member(Jannatul) cards with image, name, ID, and department. -->
+    <div class="col-4">
+  <div class="card">
+    <img src="images/jannat.png" class="shirin">
+    <div class="card-body">
+      <h5 class="card-title"><b>Name : </b>Jannatul Ferdousy Tanni
+      </h5>
+      <p class="card-text"><b>ID : </b>221400015</p>
+      <p class="card-text"><b>Department : </b>CSE</p>
+    </div>
+  </div>
+</div>
 
 
 

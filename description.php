@@ -24,6 +24,17 @@ $book = $result->fetch_assoc();
 <!--Check if user is logged in and retrieve user ID from session-->
     if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
+<!--Fetch count of completed orders for this book by the user-->
+        $query = "SELECT COUNT(*) as completed_orders 
+              FROM orders o 
+              JOIN order_items oi ON o.id = oi.order_id 
+              WHERE o.user_id = ? AND oi.book_id = ? AND o.status = 'completed'";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ii", $user_id, $book_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $completed_orders = $result->fetch_assoc()['completed_orders'] ?? 0;
+
 
 
 

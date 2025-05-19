@@ -34,5 +34,9 @@ include "header.php";
           </div>
       </div>
   </div>
+<!--Create container and row for team section layout.-->
+  <div class="container">
+  <div class="row ">
+
 
 

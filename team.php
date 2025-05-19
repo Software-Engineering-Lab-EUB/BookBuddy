@@ -13,5 +13,11 @@ include "header.php";
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Book Store</title>
 </head>
+<!--  Add custom style for carousel image height.  -->
+<style>
+  .height_image {
+      height: 400px;
+  }
+</style>
 
 

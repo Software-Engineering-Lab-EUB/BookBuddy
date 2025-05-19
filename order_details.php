@@ -8,4 +8,7 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 
+// Get the order ID from the URL
+$order_id = intval($_GET['id']);
+
 

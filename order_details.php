@@ -36,6 +36,16 @@ $stmt->bind_param("i", $order_id);
         background-color: #f4f7fc;
         font-family: 'Arial', sans-serif;
    }
+    // Design main container with padding, border-radius, and shadow.
+    .container {
+    max-width: 900px;
+    margin-top: 50px;
+    background-color: white;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
 
     </style>
 </head>

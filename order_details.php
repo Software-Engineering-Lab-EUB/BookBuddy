@@ -90,7 +90,21 @@ h2 {
     background-color: #f8d7da;
     color: #721c24;
 }
-
+// Style footer section with background, text, and hover effect.
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: 50px;
+}
+footer a {
+    color: #f8f9fa;
+    text-decoration: none;
+}
+footer a:hover {
+    text-decoration: underline;
+}
 
 
     </style>

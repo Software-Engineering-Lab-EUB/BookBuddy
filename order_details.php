@@ -22,6 +22,20 @@ $stmt = $conn->prepare("
 ");
 // Bind order ID parameter to the prepared SQL statement.
 $stmt->bind_param("i", $order_id);
+// Add HTML boilerplate with Bootstrap and custom styling for order details page.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        /* CSS styles here... (same as in your code) */
+    </style>
+</head>
+<body>
+
 
 
 

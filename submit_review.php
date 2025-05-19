@@ -34,6 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->execute();
     $result = $stmt->get_result();
     $completed_orders = $result->fetch_assoc()['completed_orders'] ?? 0;
+<!-- Fetch count of existing reviews by the user for this book.-->
+    $query = "SELECT COUNT(*) as review_count FROM reviews WHERE user_id = ? AND book_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ii", $user_id, $book_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $review_count = $result->fetch_assoc()['review_count'] ?? 0;
+
 
 
 

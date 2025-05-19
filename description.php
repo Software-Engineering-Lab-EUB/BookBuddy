@@ -34,6 +34,14 @@ $book = $result->fetch_assoc();
     $stmt->execute();
     $result = $stmt->get_result();
     $completed_orders = $result->fetch_assoc()['completed_orders'] ?? 0;
+<!--Get number of reviews submitted by user for this book-->
+     $query = "SELECT COUNT(*) as user_reviews FROM reviews WHERE user_id = ? AND book_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ii", $user_id, $book_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user_reviews = $result->fetch_assoc()['user_reviews'] ?? 0;
+
 
 
 

@@ -19,5 +19,20 @@ include "header.php";
       height: 400px;
   }
 </style>
+<!-- Add Bootstrap carousel for homepage slider images. -->
+<body>
+  <div id="carouselExampleSlidesOnly" class="carousel slide pt-1 height_image" data-bs-ride="carousel">
+      <div class="carousel-inner">
+          <div class="carousel-item active">
+              <img src="images/slider1.jpg" class="d-block w-100 " alt="Slider 1">
+          </div>
+          <div class="carousel-item">
+              <img src="images/slider2.jpg" class="d-block w-100" alt="Slider 2">
+          </div>
+          <div class="carousel-item">
+              <img src="images/slider3.jpg" class="d-block w-100" alt="Slider 3">
+          </div>
+      </div>
+  </div>
 
 

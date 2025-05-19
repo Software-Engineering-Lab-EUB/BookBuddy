@@ -34,8 +34,9 @@ $book = $result->fetch_assoc();
     $stmt->execute();
     $result = $stmt->get_result();
     $completed_orders = $result->fetch_assoc()['completed_orders'] ?? 0;
-<!--Allow review only if completed orders exceed submitted reviews-->
-        if ($completed_orders > $user_reviews) {
+    
+<!--Allow review only if completed orders exceed submitted reviews-->    
+    if ($completed_orders > $user_reviews) {
         $can_review = true;
     }
 }

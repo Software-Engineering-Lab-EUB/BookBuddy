@@ -47,7 +47,6 @@ $book = $result->fetch_assoc();
         $can_review = true;
     }
 }
-
 include "header.php";
 ?>
 

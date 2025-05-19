@@ -61,6 +61,20 @@ h2 {
     font-weight: 600;
     color: #333;
 }
+// Style list items and book info display inside order details.
+.list-group-item {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 10px;
+}
+.list-group-item .book-info {
+    display: flex;
+    justify-content: space-between;
+}
+.list-group-item .book-info span {
+    font-size: 1rem;
+    color: #333;
+}
 
 
     </style>

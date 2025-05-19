@@ -57,7 +57,15 @@ if ($stmt->execute()) {
                 echo "<h4>Books in this Order:</h4><ul class='list-group'>";
                 $orderPrinted = true;
             }
-
+// Loop through each ordered book and display quantity and price.
+            echo "<li class='list-group-item'>
+                    <div class='book-info'>
+                        <span>{$order['book_name']}</span>
+                        <span>Qty: {$order['quantity']} | Price: \${$order['price']}</span>
+                    </div>
+                </li>";
+        }
+        echo "</ul></div>";
 
 
 

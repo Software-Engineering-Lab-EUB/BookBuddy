@@ -35,6 +35,11 @@ $stmt->bind_param("i", $order_id);
     </style>
 </head>
 <body>
+    // Execute the prepared statement and retrieve the result set.
+    <?php
+if ($stmt->execute()) {
+    $result = $stmt->get_result();
+
 
 
 

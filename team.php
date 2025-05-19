@@ -37,6 +37,18 @@ include "header.php";
 <!--Create container and row for team section layout.-->
   <div class="container">
   <div class="row ">
+<!--Add individual team member(shiren) cards with image, name, ID, and department. -->
+    <div class="col-4">
+  <div class="card">
+    <img src="images/shirin.png" class="shirin">
+    <div class="card-body">
+      <h5 class="card-title"><b>Name : </b>Mst. Alif Jan Nur Shiren</h5>
+      <p class="card-text"><b>ID : </b>221400048</p>
+      <p class="card-text"><b>Department : </b>CSE</p>
+    </div>
+  </div>
+</div>
+
 
 
 

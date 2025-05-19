@@ -66,6 +66,14 @@ if ($stmt->execute()) {
                 </li>";
         }
         echo "</ul></div>";
+    }
+   // Handle empty result or query execution failure with user-friendly messages.
+   else {
+        echo "<div class='container mt-5 alert alert-warning'>No order details found for this order ID.</div>";
+    }
+} else {
+    echo "<div class='container mt-5 alert alert-danger'>Error executing query: " . $stmt->error . "</div>";
+}
 
 
 

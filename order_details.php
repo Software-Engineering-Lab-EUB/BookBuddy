@@ -39,6 +39,11 @@ $stmt->bind_param("i", $order_id);
     <?php
 if ($stmt->execute()) {
     $result = $stmt->get_result();
+// Check if order data exists and initialize container for output.
+   if ($result->num_rows > 0) {
+        $orderPrinted = false;
+        echo "<div class='container'>";
+
 
 
 

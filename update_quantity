@@ -3,3 +3,9 @@ session_start();
 if (isset($_POST['quantities']) && is_array($_POST['quantities'])) {
 
 
+    foreach ($_POST['quantities'] as $book_id => $qty) {
+        $book_id = (int)$book_id;
+        $qty = (int)$qty;
+
+
+

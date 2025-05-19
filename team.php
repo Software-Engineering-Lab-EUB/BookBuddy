@@ -70,10 +70,13 @@ include "header.php";
         <p class="card-text"><b>Department  : </b>CSE</p>
       </div>
     </div>
-  </div>
-  
+  </div> 
 </div>
 </div>
+  <?php include "footer.php"; ?>
+</body>
+</html>
+
 
 
 

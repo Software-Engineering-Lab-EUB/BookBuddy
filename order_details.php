@@ -31,7 +31,12 @@ $stmt->bind_param("i", $order_id);
     <title>Order Details</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
-        /* CSS styles here... (same as in your code) */
+    // Style body with background color and base font.
+    body {
+        background-color: #f4f7fc;
+        font-family: 'Arial', sans-serif;
+   }
+
     </style>
 </head>
 <body>

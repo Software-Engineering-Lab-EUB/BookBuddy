@@ -13,4 +13,7 @@ foreach ($_POST['quantities'] as $book_id => $qty) {
     }
 }
 
+header("Location: cart_view.php");
+exit();
+
 

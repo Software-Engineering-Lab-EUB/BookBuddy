@@ -19,6 +19,9 @@ $result = $stmt->get_result();
     exit;
 }
 $book = $result->fetch_assoc();
+<!--Initialize review permission flag as false by default-->
+    $can_review = false;
+
 
 
 

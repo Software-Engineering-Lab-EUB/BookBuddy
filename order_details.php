@@ -45,6 +45,22 @@ $stmt->bind_param("i", $order_id);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
+// Style headings and order detail section.
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+}
+.order-details {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+.order-details strong {
+    font-weight: 600;
+    color: #333;
+}
 
 
     </style>

@@ -17,3 +17,11 @@ $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $book_id);
 $stmt->execute();
 $result = $stmt->get_result();
+
+<!--Check if book exists and retrieve result from database -->
+    if ($result->num_rows == 0) {
+    echo "Book not found.";
+    exit;
+}
+$book = $result->fetch_assoc();
+

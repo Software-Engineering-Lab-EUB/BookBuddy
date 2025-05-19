@@ -28,4 +28,9 @@ $book = $result->fetch_assoc();
 <!--Initialize review permission flag as false by default-->
     $can_review = false;
 
+<!--Check if user is logged in and retrieve user ID from session-->
+    if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+
+
 

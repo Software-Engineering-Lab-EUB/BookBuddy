@@ -74,6 +74,13 @@ if ($stmt->execute()) {
 } else {
     echo "<div class='container mt-5 alert alert-danger'>Error executing query: " . $stmt->error . "</div>";
 }
+// Include footer and close HTML document structure.
+include "footer.php"; // Include footer
+?>
+
+</body>
+</html>
+
 
 
 

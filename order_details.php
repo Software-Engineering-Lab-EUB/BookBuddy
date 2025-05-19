@@ -43,6 +43,21 @@ if ($stmt->execute()) {
    if ($result->num_rows > 0) {
         $orderPrinted = false;
         echo "<div class='container'>";
+// Display order metadata like status, mobile, and transaction ID once.
+           while ($order = $result->fetch_assoc()) {
+            if (!$orderPrinted) {
+                echo "<h2>Order Details (Order ID: {$order['order_id']})</h2>";
+                echo "<div class='order-details'>
+                        <p><strong>Total Price:</strong> \${$order['total_price']}</p>
+                        <p><strong>Status:</strong> {$order['status']}</p>
+                        <p><strong>Transaction ID:</strong> {$order['transaction_id']}</p>
+                        <p><strong>Mobile:</strong> {$order['mobile']}</p>
+                        <p><strong>Order Date:</strong> {$order['created_at']}</p>
+                      </div>";
+                echo "<h4>Books in this Order:</h4><ul class='list-group'>";
+                $orderPrinted = true;
+            }
+
 
 
 

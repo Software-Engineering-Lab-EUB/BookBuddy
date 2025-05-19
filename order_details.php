@@ -75,6 +75,22 @@ h2 {
     font-size: 1rem;
     color: #333;
 }
+// Style warning and error alerts for order messages.
+.alert {
+    font-size: 1.1rem;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+}
+.alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
 
 
     </style>

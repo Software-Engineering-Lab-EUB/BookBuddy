@@ -1,55 +1,139 @@
-<?php
- // Start the session to access session variables
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Book Store</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BookBuddy</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color:rgb(40, 126, 184);
+      padding: 10px 20px;
+      position: sticky;
+      top: 0px;
+      z-index: 1000;
+    }
+
+    .navbar .logo img {
+      max-height: 60px; /* Adjust this value for logo size */
+      width: auto;  /* Keep aspect ratio */
+    }
+
+    .navbar ul {
+      display: flex;
+      list-style: none;
+    }
+
+    .navbar ul li {
+      margin: 0px 15px;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .navbar ul li a:hover {
+      color: #ffc107;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: white;
+      min-width: 200px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content div, .dropdown-content a {
+      color: #333;
+      padding: 10px;
+      text-decoration: none;
+      display: block;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f0f0f0;
+    }
+
+    @media screen and (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar ul {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .navbar ul li {
+        margin: 10px 0;
+      }
+    }
+  </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="<?= isset($_SESSION["role"]) && $_SESSION["role"] === "admin" ? "admin_index.php" : "index.php"; ?>">BookBuddy</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
 
-                    <?php if (isset($_SESSION["user_id"])): ?>
-                        <li class="nav-item">
-                            <a class="nav-link">Welcome, <?= $_SESSION["role"] === "admin" ? "Admin " : ""; ?><?= htmlspecialchars($_SESSION["user_name"]); ?></a>
-                        </li>
+<header class="navbar">
+  <div class="logo">
+    <a href="index.php"><img src="images/Logo.png" alt="BookBuddy"></a>
+  </div>
 
-                        <?php if ($_SESSION["role"] === "admin"): ?>
-                            <li class="nav-item"><a class="nav-link" href="admin_panel.php">Admin Panel</a></li>
-                        <?php else: ?>
-                            <li class="nav-item"><a class="nav-link" href="cart_view.php">Cart</a></li>
-                            <li class="nav-item"><a class="nav-link" href="orders.php">My Orders</a></li>
-                        <?php endif; ?>
+  <ul>
+    <li><a href="index.php">Home</a></li>
+    <li><a href="team.php">Team</a></li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                My Account
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="accountDropdown">
-                                <li class="dropdown-item">Username: <?= htmlspecialchars($_SESSION["user_name"]); ?></li>
-                                <li class="dropdown-item">Email: <?= htmlspecialchars($_SESSION["email"] ?? 'Not Available'); ?></li>
-                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
-                            </ul>
-                        </li>
-                    <?php else: ?>
-                        <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
-                    <?php endif; ?>
-                </ul>
-            </div>
+    <?php if (isset($_SESSION["user_id"])): ?>
+      <?php if ($_SESSION["role"] === "admin"): ?>
+        <li><a href="admin_panel.php">Admin Panel</a></li>
+      <?php else: ?>
+        <li><a href="cart_view.php">Cart</a></li>
+        <li><a href="orders.php">My Orders</a></li>
+      <?php endif; ?>
+
+      <li class="dropdown">
+        <a href="#">Welcome, <?= $_SESSION["role"] === "admin" ? "Admin " : ""; ?><?= htmlspecialchars($_SESSION["user_name"]); ?> &#9662;</a>
+        <div class="dropdown-content">
+          <div>Username: <?= htmlspecialchars($_SESSION["user_name"]); ?></div>
+          <div>Email: <?= htmlspecialchars($_SESSION["email"] ?? 'Not Available'); ?></div>
+          <a href="logout.php" style="color: red;">Logout</a>
         </div>
-    </nav>
-    <div class="container mt-4">
+      </li>
+    <?php else: ?>
+      <li><a href="login.php">Login</a></li>
+      <li><a href="register.php">Register</a></li>
+    <?php endif; ?>
+  </ul>
+</header>
+
+</body>
+</html>

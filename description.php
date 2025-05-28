@@ -104,4 +104,38 @@ include "header.php";
         }
         ?>
         </div>
+    </div>
+    <?php if ($can_review): ?>
+        <div class="mt-5">
+            <h4><i class="fas fa-pen"></i> Leave a Review</h4>
+            <div class="card shadow">
+                <div class="card-body">
+                    <form action="submit_review.php" method="POST">
+                        <input type="hidden" name="book_id" value="<?= htmlspecialchars($book_id); ?>">
+                        <!-- star -->
+                        <div class="form-group">
+                            <label for="rating">Rating (1 to 5 stars):</label>
+                            <input type="number" id="rating" name="rating" min="1" max="5" class="form-control" required>
+                        </div>
+                        <!-- review -->
+                        <div class="form-group">
+                            <label for="review">Review:</label>
+                            <textarea id="review" name="review" class="form-control" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit Review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <?php else: ?>
+        <p class="mt-3 text-muted">You must complete the book delivery before submitting a new review or you’ve already reviewed all your purchases.</p>
+    <?php endif; ?>
+</div>
+
+<script>
+function redirectToLogin() {
+    alert("You are not logged in. Please log in first.");
+    window.location.href = "login.php";
+}
+</script>
     

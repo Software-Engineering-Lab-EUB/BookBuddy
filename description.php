@@ -22,7 +22,6 @@ if ($result->num_rows == 0) {
     exit;
 }
 $book = $result->fetch_assoc();
-
 // Check if user can review
 $can_review = false;
 if (isset($_SESSION['user_id'])) {
@@ -52,4 +51,3 @@ if (isset($_SESSION['user_id'])) {
 
 include "header.php";
 ?>
-

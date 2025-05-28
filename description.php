@@ -5,11 +5,12 @@ session_start();
 include "db.php";
 
 // Get book ID from URL
-$book_id = isset($_GET['id']) ? intval($_GET['id']) :
+$book_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if ($book_id <= 0) {
     echo "Invalid book ID.";
     exit;
 }
+
 // Fetch book data
 $query = "SELECT * FROM books WHERE id = ?";
 $stmt = $conn->prepare($query);
@@ -22,6 +23,7 @@ if ($result->num_rows == 0) {
     exit;
 }
 $book = $result->fetch_assoc();
+
 // Check if user can review
 $can_review = false;
 if (isset($_SESSION['user_id'])) {
@@ -52,8 +54,7 @@ if (isset($_SESSION['user_id'])) {
 include "header.php";
 ?>
 
-
-<!-- Page content starts -->
+<!--  -->
 <div class="container mt-5">
     <h2 class="text-center mb-4"><?= htmlspecialchars($book["title"]); ?></h2>
 
@@ -105,6 +106,7 @@ include "header.php";
         ?>
         </div>
     </div>
+
     <?php if ($can_review): ?>
         <div class="mt-5">
             <h4><i class="fas fa-pen"></i> Leave a Review</h4>
@@ -138,4 +140,11 @@ function redirectToLogin() {
     window.location.href = "login.php";
 }
 </script>
-    
+
+<!-- Bootstrap & JS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<?php include "footer.php"; ?>
